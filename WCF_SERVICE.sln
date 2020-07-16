@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF_SERVICE", "WCF_SERVICE\WCF_SERVICE.csproj", "{D52C4237-BE02-41A6-B60A-73E90F7FAFAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLibraryClass", "OnlineLibraryClass\OnlineLibraryClass.csproj", "{140C2735-FA7B-4055-BEF2-3EF7A4F039A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D52C4237-BE02-41A6-B60A-73E90F7FAFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D52C4237-BE02-41A6-B60A-73E90F7FAFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D52C4237-BE02-41A6-B60A-73E90F7FAFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{140C2735-FA7B-4055-BEF2-3EF7A4F039A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140C2735-FA7B-4055-BEF2-3EF7A4F039A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140C2735-FA7B-4055-BEF2-3EF7A4F039A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140C2735-FA7B-4055-BEF2-3EF7A4F039A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

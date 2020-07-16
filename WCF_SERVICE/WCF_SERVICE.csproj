@@ -61,14 +61,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="OneLibrary.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="DBUtl.cs" />
+    <Compile Include="OneLibrary.svc.cs">
+      <DependentUpon>OneLibrary.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="IOneLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineLibraryClass\OnlineLibraryClass.csproj">
+      <Project>{140c2735-fa7b-4055-bef2-3ef7a4f039a4}</Project>
+      <Name>OnlineLibraryClass</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
