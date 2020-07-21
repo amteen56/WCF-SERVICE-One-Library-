@@ -11,10 +11,12 @@ namespace OnlineLibraryClass
         public int itemid { get; set; }
         public string itemtype { get; set; }
         public string itemtitle { get; set; }
-        public int cost { get; set; }
+        public double cost { get; set; }
         public int noofissue { get; set; }
         public string issuedate { get; set; }
         public string returndate { get; set; }
+        public string uname { get; set; }
+
         public static double fine { get; set; }
 
         public OnlineLibData()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -24,12 +25,12 @@ namespace WCF_SERVICE
                 return false;
         }
 
-        public bool BorrowItem(int itemid, string returndate)
+        public bool BorrowItem(int itemid, string returndate, string uname)
         {
             string query =
-           @"INSERT INTO IssueDetails (ItemId, IssueDate, ReturnDate, IsReturned) VALUES
-                 ('{0}',convert(datetime, '{1}',103), convert(datetime, '{2}', 103),0)";
-            int rowadded = DBUtl.ExecSQL(query, itemid, DateTime.Now.ToShortDateString(), returndate);
+           @"INSERT INTO IssueDetails (ItemId, IssueDate, ReturnDate, uname, IsReturned) VALUES
+                 ('{0}',convert(datetime, '{1}',103), convert(datetime, '{2}', 103),'{3}', 0)";
+            int rowadded = DBUtl.ExecSQL(query, itemid, DateTime.Now.ToShortDateString(), returndate, uname);
             if (rowadded > 0)
             {
                 query =
@@ -68,15 +69,26 @@ namespace WCF_SERVICE
         {
             string query =
             @"SELECT * FROM Items";
-            var dlist = DBUtl.GetList(query);
-            return dlist.OfType<OnlineLibData>().ToList();
+            var dlist = DBUtl.GetTable(query);
+            var list = new List<OnlineLibData>();
+            foreach (DataRow row in dlist.Rows)
+            {
+                OnlineLibData obj = new OnlineLibData();
+                obj.itemid = Convert.ToInt32(row["Id"].ToString());
+                obj.cost = Convert.ToInt32(row["cost"].ToString());
+                obj.itemtype = row["ItemType"].ToString();
+                obj.itemtitle = row["itemTitle"].ToString();
+                obj.noofissue = Convert.ToInt32(row["noOfIssue"].ToString());
+                list.Add(obj);
+            }
+            return list;
         }
 
-        public double ReturnItem(int itemid)
+        public double ReturnItem(int itemid,string uname)
         {
             string query =
-           @"SELECT * FROM IssueDetails WHERE ItemId = '{0}' AND IsReturned = 0";
-            var dt = DBUtl.GetTable(query,itemid);
+           @"SELECT * FROM IssueDetails WHERE ItemId = '{0}' AND IsReturned = 0 AND uname = '{1}'";
+            var dt = DBUtl.GetTable(query,itemid,uname);
             if (dt.Rows.Count > 0)
             {
                 DateTime date = Convert.ToDateTime(dt.Rows[0]["ReturnDate"].ToString());
@@ -92,7 +104,16 @@ namespace WCF_SERVICE
          @"UPDATE Items SET noOfIssue = noOfIssue+1 WHERE Id = '{0}'";
                 int rowadded = DBUtl.ExecSQL(query, itemid);
                 if (rowadded > 0)
+                {
+                    query = @"UPDATE IssueDetails SET IsReturned = 1 WHERE ItemId = '{0}' AND uname = '{1}'";
+                    rowadded = DBUtl.ExecSQL(query, itemid,uname);
+                    if (rowadded > 0)
+                        return cost + fine;
+                    else
+                        return -1;
                     return cost + fine;
+
+                }
                 else
                     return -1;
             }

@@ -20,9 +20,9 @@ namespace WCF_SERVICE
         [OperationContract]
         bool DeleteItem(int Itemid);
         [OperationContract]
-        bool BorrowItem(int itemid,string returndate);
+        bool BorrowItem(int itemid,string returndate,string uname);
         [OperationContract]
-        double ReturnItem(int itemid);
+        double ReturnItem(int itemid, string uname);
         [OperationContract]
         List<OnlineLibData> getData();
     }
